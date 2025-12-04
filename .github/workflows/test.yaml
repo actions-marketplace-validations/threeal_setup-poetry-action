@@ -1,0 +1,69 @@
+name: Test
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  test-action:
+    name: Test Action
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-14, windows-2022]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          path: setup-poetry-action
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Poetry
+        uses: ./setup-poetry-action
+
+      - name: Check Poetry Version
+        shell: bash
+        run: test "$(poetry --version)" == 'Poetry (version ${{ vars.POETRY_LATEST_VERSION }})'
+
+  test-action-with-specific-poetry-version:
+    name: Test Action With Specific Poetry Version
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          path: setup-poetry-action
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Poetry With a Specific Version
+        uses: ./setup-poetry-action
+        with:
+          version: 1.5.1
+          cache: false
+
+      - name: Check Poetry Version
+        shell: bash
+        run: test "$(poetry --version)" == 'Poetry (version 1.5.1)'
+
+  test-action-without-cache:
+    name: Test Action Without Cache
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          path: setup-poetry-action
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Poetry Without Cache
+        uses: ./setup-poetry-action
+        with:
+          cache: false
+
+      - name: Check Poetry Version
+        shell: bash
+        run: test "$(poetry --version)" == 'Poetry (version ${{ vars.POETRY_LATEST_VERSION }})'

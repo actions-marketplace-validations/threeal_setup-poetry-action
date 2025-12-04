@@ -2,16 +2,14 @@ name: Setup Poetry Version
 author: Alfi Maulana
 description: Set up a specific version of Poetry
 branding:
-  color: black
   icon: terminal
+  color: black
 inputs:
   version:
-    description: The Poetry version to be set up.
-    required: false
+    description: The Poetry version to be set up
     default: latest
   cache:
-    description: Use caching during Poetry installation.
-    required: false
+    description: Use caching during Poetry installation
     default: true
 runs:
   using: composite
@@ -26,7 +24,7 @@ runs:
 
     - id: cache
       if: inputs.cache == 'true'
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v4.3.0
       with:
         path: |
           ${{ steps.pipx.outputs.bin_dir }}/poetry*

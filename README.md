@@ -1,9 +1,5 @@
 # Setup Poetry Action
 
-[![version](https://img.shields.io/github/v/release/threeal/setup-poetry-action?style=flat-square)](https://github.com/threeal/setup-poetry-action/releases)
-[![license](https://img.shields.io/github/license/threeal/setup-poetry-action?style=flat-square)](./LICENSE)
-[![build status](https://img.shields.io/github/actions/workflow/status/threeal/setup-poetry-action/action.yaml?label=test&branch=main&style=flat-square)](https://github.com/threeal/setup-poetry-action/actions/workflows/action.yaml)
-
 The Setup Poetry Action is a [GitHub Action](https://github.com/features/actions) designed to streamline the setup of [Poetry](https://python-poetry.org/), a powerful dependency and packaging manager for [Python](https://www.python.org/) projects. This action allows you to easily configure and use a specific version of Poetry within your GitHub Actions workflow, enabling you to build and test your Python project seamlessly.
 
 ## Key Features
@@ -16,7 +12,7 @@ The Setup Poetry Action offers the following key features:
 
 ## Usage
 
-To get started with the Setup Poetry Action, you can refer to the [action.yaml](./action.yaml) file for detailed configuration options. Additionally, if you are new to GitHub Actions, you can explore the [GitHub Actions guide](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions) for a comprehensive overview.
+To get started with the Setup Poetry Action, you can refer to the [action.yml](./action.yml) file for detailed configuration options. Additionally, if you are new to GitHub Actions, you can explore the [GitHub Actions guide](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions) for a comprehensive overview.
 
 ### Inputs
 
@@ -41,10 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Poetry
-        uses: threeal/setup-poetry-action@v1.0.0
+        uses: threeal/setup-poetry-action@v1.1.0
 
       - name: Install dependencies
         run: poetry install
@@ -58,7 +54,7 @@ You can specify the Poetry version to be used by providing it as an input parame
 
 ```yaml
 - name: Setup Poetry
-  uses: threeal/setup-poetry-action@v1.0.0
+  uses: threeal/setup-poetry-action@v1.1.0
   with:
     version: 1.5.1
 ```
@@ -69,12 +65,12 @@ To set both the Python and Poetry versions, you can combine the Setup Poetry Act
 
 ```yaml
 - name: Setup Python
-  uses: actions/setup-python@v4.7.0
+  uses: actions/setup-python@v5.0.0
   with:
     python-version: 3.11
 
 - name: Setup Poetry
-  uses: threeal/setup-poetry-action@v1.0.0
+  uses: threeal/setup-poetry-action@v1.1.0
   with:
     version: 1.5.1
 ```
@@ -85,7 +81,7 @@ By default, caching is enabled. To disable caching, set the `cache` input parame
 
 ```yaml
 - name: Setup Poetry without caching
-  uses: threeal/setup-poetry-action@v1.0.0
+  uses: threeal/setup-poetry-action@v1.1.0
   with:
     cache: false
 ```
@@ -94,4 +90,4 @@ By default, caching is enabled. To disable caching, set the `cache` input parame
 
 This project is licensed under the terms of the [MIT License](./LICENSE).
 
-Copyright © 2023 [Alfi Maulana](https://github.com/threeal/)
+Copyright © 2023-2025 [Alfi Maulana](https://github.com/threeal/)
